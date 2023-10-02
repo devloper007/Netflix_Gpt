@@ -11,6 +11,11 @@
 -deploy app to firebase/production
 -user Sign iin/Sign up with firebase
 -setup redux store
+-implemented sign out feature
+-bug fix related to sign in/out with authStateChange method of firebase
+-login to TMDB(the movies data base) and create an app over there to get an API key and access token
+-fetch movies data from TMDB APIs
+-create main container to handle the main/home screen video and title
 
 
 # features
