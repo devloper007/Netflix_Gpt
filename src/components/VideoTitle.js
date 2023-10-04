@@ -1,20 +1,11 @@
-import React, { useEffect } from 'react'
-import { API_OPTIONS } from '../utils/constants';
+import React from 'react';
+import { IMG_CDN_URL } from '../utils/constants';
 
 const VideoTitle = ({title, overview, logo}) => {
-
-// const getMovieImage = async() =>{
-//     const data = await fetch(`https://api.themoviedb.org/3/movie/${id}/images`, API_OPTIONS);
-//     const json = await data.json();
-//     console.log('json 11', json);
-// }
-// useEffect(()=>{
-//     getMovieImage();
-// },[id]);
-
   return (
     <div className='w-screen aspect-video absolute bg-gradient-to-r from-black pt-[14%] pl-[10%]'>
       <div className='flex flex-col gap-4 w-1/3 text-white'>
+        <img className='w-28' src={IMG_CDN_URL+logo} alt="movie-logo" />
       <h1 className='font-bold text-3xl'>{title}</h1>
         <p className=''>{overview}</p>
         <div className=''>

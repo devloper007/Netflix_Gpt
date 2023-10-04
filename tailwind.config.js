@@ -4,8 +4,17 @@ module.exports = {
     "./src/**/*.{js,html,jsx}"
   ],
   theme: {
-    extend: {},
+    extend: {
+      hideScrollbar: {
+        '::-webkit-scrollbar': {
+          display: 'none',
+        },
+
+        '@supports (-moz-appearance:none)': {
+          'scrollbar-width': 'none',
+        }
+    },
   },
   plugins: [],
 }
-
+}

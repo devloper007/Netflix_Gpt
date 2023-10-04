@@ -16,6 +16,10 @@
 -login to TMDB(the movies data base) and create an app over there to get an API key and access token
 -fetch movies data from TMDB APIs
 -create main container to handle the main/home screen video and title
+-create secondary container where all trending and upcoming movie list is there
+-create browse page osm
+-create different hooks to get data for diff catagory movies like trending, upcoming etc.
+
 
 
 # features

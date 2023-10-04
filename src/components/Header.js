@@ -54,7 +54,7 @@ signOut(auth).then(() => {
           </select>
           {
             user && <div className='flex gap-6'>
-              <img className='w-10' src={user.photoURL} alt="user-logo" /> 
+              <img className='h-8 w-fit rounded-full' src={user?.photoURL} alt="user-logo"/> 
           <button onClick={handleSignOut} className='bg-red-600 text-white rounded-md px-4 py-1'>Sign Out</button>
             </div>
           }

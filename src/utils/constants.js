@@ -6,6 +6,9 @@ export const USER_LOGO =
   "https://assets.stickpng.com/images/585e4bcdcb11b227491c3396.png";
 export const NOW_PLAYING_MOVIES_LIST_URL =
   "https://api.themoviedb.org/3/movie/now_playing?page=1";
+export const POPULAR_MOVIES = "https://api.themoviedb.org/3/movie/popular";
+export const TOP_RATED_MOVIES = "https://api.themoviedb.org/3/movie/top_rated";
+export const UPCOMING_MOVIES = "https://api.themoviedb.org/3/movie/upcoming";
 export const API_OPTIONS = {
   method: "GET",
   headers: {
@@ -14,3 +17,4 @@ export const API_OPTIONS = {
       "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNTRhYzMyMjNmZWU4ZGYyOTQzNzA1ODgxNTMxZTQxZCIsInN1YiI6IjY1MWE3ZTE4NzQ1MDdkMDEzOTVhNDlmOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.c43Cq0uL2RAtcUksRnvOs7Agc1Go0ti7t7zSPgUsVG0",
   },
 };
+export const IMG_CDN_URL = "https://image.tmdb.org/t/p/original/";
