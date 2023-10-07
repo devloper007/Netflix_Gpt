@@ -5,11 +5,12 @@ import { auth } from "../utils/firebase";
 import { useNavigate } from 'react-router-dom';
 import { addUser, removeUser } from '../utils/userSlice';
 import { NETFLIX_LOGO } from '../utils/constants';
+import { addGptSearchToggle } from '../utils/gptSlice';
+import { changeLanguage } from '../utils/configSlice';
 
 const Header = () => {
   // const [signInToggle, setSignInToggle] = useState(false);
   const user = useSelector(store => store.user);
-  console.log('user 7',user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleSignOut = () =>{
@@ -27,7 +28,6 @@ signOut(auth).then(() => {
       if (user) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/auth.user
-        console.log('user 17',user);
         const {uid, displayName, email, photoURL } = user;
         dispatch(addUser({uid: uid, name: displayName, email: email, photoURL:photoURL}));
         navigate('/browse')
@@ -40,6 +40,13 @@ signOut(auth).then(() => {
     return () => unsubscribe(); //Unsubscribe when component unmount
   },[]);
 
+  const handleGptSearchToggle =()=>{
+    dispatch(addGptSearchToggle());
+  }
+
+  const handleLanguageChange = (e) =>{
+    dispatch(changeLanguage(e.target.value));
+  }
 
   // const handleSignIn = () =>{
   //   navigate('/')
@@ -48,9 +55,10 @@ signOut(auth).then(() => {
     <div className='absolute z-10 flex justify-around w-full items-center py-2 bg-gradient-to-b from-black'>
         <img className='w-40' src={NETFLIX_LOGO} alt="logo" />
         <div className='flex gap-6'>
-          <select className='bg-transparent text-white border border-white rounded-md px-4 py-1'>
-            <option value="english">English</option>
-            <option value="Hindi">Hindi</option>
+          <button className='bg-purple-800 rounded-md text-white py-2 px-4' onClick={handleGptSearchToggle}>GPT Search</button>
+          <select onClick={handleLanguageChange} className='bg-transparent text-white border border-white rounded-md px-4 py-1'>
+            <option value="en">English</option>
+            <option value="hindi">Hindi</option>
           </select>
           {
             user && <div className='flex gap-6'>

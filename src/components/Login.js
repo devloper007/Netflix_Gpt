@@ -4,21 +4,25 @@ import { checkValidData } from '../utils/validation';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from '../utils/firebase';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addUser } from '../utils/userSlice';
 import { LOGIN_PAGE_COVER, USER_LOGO } from '../utils/constants';
+import { lang } from '../utils/langConstants';
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errMessage, setErrMessage] = useState(null);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const email = useRef(null);
   const password = useRef(null);
   const name = useRef(null);
+
+  const language = useSelector(store => store.config.language);
+
 const handleClickEvent = () =>{
-  console.log('email',email);
-  console.log(password);
   const message = checkValidData(name?.current?.value, email.current.value, password.current.value);
   setErrMessage(message);
   if(message === null){
@@ -27,7 +31,6 @@ const handleClickEvent = () =>{
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
-        console.log('user 29',user);
         updateProfile(user, {
           displayName: name.current.value, photoURL: USER_LOGO
         }).then(() => {
@@ -58,7 +61,6 @@ const handleClickEvent = () =>{
     .then((userCredential) => {
       // Signed in 
       const user = userCredential.user;
-      console.log('user',user);
       navigate("/browse");
     })
     .catch((error) => {
@@ -77,12 +79,12 @@ const handleClickEvent = () =>{
         <div className='relative top-48 bg-black bg-opacity-80 w-3/12 mx-auto rounded-md px-8 py-24 text-white'>
           <p className='text-3xl text-white pb-6 font-semibold'>{isSignInForm ? "Sign In":"Sign Up"}</p>
           <form onSubmit={e => e.preventDefault()} className='flex flex-col gap-8'>
-            {!isSignInForm && <input ref={name} className='px-4 py-3 bg-gray-800 rounded-md text-white text-base outline-none' type="text" name="name" placeholder='Name...'/> }
-            <input ref={email} className='px-4 py-3 bg-gray-800 rounded-md text-white text-base outline-none' type="email" name="email" placeholder='Email...'/>
-            <input ref={password} className='px-4 py-3 bg-gray-800 rounded-md text-white text-base outline-none' type="password" name="password" placeholder='Password...'/>
+            {!isSignInForm && <input ref={name} className='px-4 py-3 bg-gray-800 rounded-md text-white text-base outline-none' type="text" name="name" placeholder={lang[language].name}/> }
+            <input ref={email} className='px-4 py-3 bg-gray-800 rounded-md text-white text-base outline-none' type="email" name="email" placeholder={lang[language].email}/>
+            <input ref={password} className='px-4 py-3 bg-gray-800 rounded-md text-white text-base outline-none' type="password" name="password" placeholder={lang[language].password}/>
             <p className='text-yellow-600'>{errMessage}</p>
             <button onClick={handleClickEvent} className='px-4 py-3 bg-red-800 rounded-md text-white font-medium text-lg'>{isSignInForm ? "Sign In":"Sign Up"}</button>
-            <p className='text-white cursor-pointer' onClick={() => setIsSignInForm(!isSignInForm)}>{isSignInForm ? "New to Netflix? Sign up now.":"Already registered? Sign In now."}</p>
+            <p className='text-white cursor-pointer' onClick={() => setIsSignInForm(!isSignInForm)}>{isSignInForm ? lang[language].signUpLine : lang[language].alreadyRegistered}</p>
           </form>
         </div>
     </div>

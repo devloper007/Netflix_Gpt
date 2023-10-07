@@ -10,7 +10,6 @@ const usePopularMovies = () => {
     const json = await data.json();
     const moviesList = json.results;
     dispatch(addpopularMovies(moviesList));
-    console.log("json data", moviesList);
   };
   useEffect(() => {
     getPopularMoviesList();

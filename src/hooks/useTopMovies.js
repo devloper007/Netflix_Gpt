@@ -10,7 +10,6 @@ const useTopMovies = () => {
     const json = await data.json();
     const moviesList = json.results;
     dispatch(addtopMovies(moviesList));
-    console.log("json data", moviesList);
   };
   useEffect(() => {
     getTopMoviesList();

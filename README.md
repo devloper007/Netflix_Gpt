@@ -19,7 +19,8 @@
 -create secondary container where all trending and upcoming movie list is there
 -create browse page osm
 -create different hooks to get data for diff catagory movies like trending, upcoming etc.
-
+-created GPT search page
+-implemented language feature
 
 
 # features
