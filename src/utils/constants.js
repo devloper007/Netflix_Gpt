@@ -9,12 +9,14 @@ export const NOW_PLAYING_MOVIES_LIST_URL =
 export const POPULAR_MOVIES = "https://api.themoviedb.org/3/movie/popular";
 export const TOP_RATED_MOVIES = "https://api.themoviedb.org/3/movie/top_rated";
 export const UPCOMING_MOVIES = "https://api.themoviedb.org/3/movie/upcoming";
+export const MOVIE_BY_QUERY = "https://api.themoviedb.org/3/search/movie?query=sholey&include_adult=false&language=en-US&page=1 ";
+
 export const API_OPTIONS = {
   method: "GET",
   headers: {
     accept: "application/json",
     Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNTRhYzMyMjNmZWU4ZGYyOTQzNzA1ODgxNTMxZTQxZCIsInN1YiI6IjY1MWE3ZTE4NzQ1MDdkMDEzOTVhNDlmOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.c43Cq0uL2RAtcUksRnvOs7Agc1Go0ti7t7zSPgUsVG0",
+      "Bearer " + process.env.REACT_APP_TMDB_API_KEY,
   },
 };
 export const IMG_CDN_URL = "https://image.tmdb.org/t/p/original/";
