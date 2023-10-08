@@ -71,19 +71,19 @@ const handleClickEvent = () =>{
   }
 }
   return (
-    <div className=''>
+    <div className='flex justify-center'>
         <Header />
           <div>
-            <img className='absolute' src={LOGIN_PAGE_COVER} alt="hero-bg-1"/>
+            <img className='absolute h-screen w-screen object-cover' src={LOGIN_PAGE_COVER} alt="hero-bg-1"/>
         </div>
-        <div className='relative top-48 bg-black bg-opacity-80 w-3/12 mx-auto rounded-md px-8 py-24 text-white'>
-          <p className='text-3xl text-white pb-6 font-semibold'>{isSignInForm ? "Sign In":"Sign Up"}</p>
-          <form onSubmit={e => e.preventDefault()} className='flex flex-col gap-8'>
-            {!isSignInForm && <input ref={name} className='px-4 py-3 bg-gray-800 rounded-md text-white text-base outline-none' type="text" name="name" placeholder={lang[language].name}/> }
-            <input ref={email} className='px-4 py-3 bg-gray-800 rounded-md text-white text-base outline-none' type="email" name="email" placeholder={lang[language].email}/>
-            <input ref={password} className='px-4 py-3 bg-gray-800 rounded-md text-white text-base outline-none' type="password" name="password" placeholder={lang[language].password}/>
+        <div className='relative top-36 md:top-40 bg-black bg-opacity-80 w-3/4 md:w-3/12 md:mx-auto rounded-md px-2 py-2 mx-auto md:px-8 md:py-8 text-white'>
+          <p className='text-lg md:text-3xl text-white pb-6 md:font-semibold'>{isSignInForm ? "Sign In":"Sign Up"}</p>
+          <form onSubmit={e => e.preventDefault()} className='flex flex-col gap-4 md:gap-8'>
+            {!isSignInForm && <input ref={name} className='px-4 py-1 md:py-3 bg-gray-800 rounded-md text-white text-base outline-none' type="text" name="name" placeholder={lang[language].name}/> }
+            <input ref={email} className='px-4 py-1 md:py-3 bg-gray-800 rounded-md text-white text-base outline-none' type="email" name="email" placeholder={lang[language].email}/>
+            <input ref={password} className='px-4 py-1 md:py-3 bg-gray-800 rounded-md text-white text-base outline-none' type="password" name="password" placeholder={lang[language].password}/>
             <p className='text-yellow-600'>{errMessage}</p>
-            <button onClick={handleClickEvent} className='px-4 py-3 bg-red-800 rounded-md text-white font-medium text-lg'>{isSignInForm ? "Sign In":"Sign Up"}</button>
+            <button onClick={handleClickEvent} className='w-1/2 mx-auto px-4 py-1 md:py-3 bg-red-800 rounded-md text-white font-medium md:text-lg'>{isSignInForm ? "Sign In":"Sign Up"}</button>
             <p className='text-white cursor-pointer' onClick={() => setIsSignInForm(!isSignInForm)}>{isSignInForm ? lang[language].signUpLine : lang[language].alreadyRegistered}</p>
           </form>
         </div>

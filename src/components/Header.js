@@ -52,18 +52,20 @@ signOut(auth).then(() => {
   //   navigate('/')
   // }
   return (
-    <div className='absolute z-10 flex justify-around w-full items-center py-2 bg-gradient-to-b from-black'>
-        <img className='w-40' src={NETFLIX_LOGO} alt="logo" />
-        <div className='flex gap-6'>
-          <button className='bg-purple-800 rounded-md text-white py-2 px-4' onClick={handleGptSearchToggle}>GPT Search</button>
-          <select onClick={handleLanguageChange} className='bg-transparent text-white border border-white rounded-md px-4 py-1'>
+    <div className='absolute z-10 flex flex-col justify-between md:flex-row w-full md:w-3/4 md:bg-gradient-to-b md:from-black'>
+        <div className='bg-black md:bg-transparent'>
+        <img className='w-40 mx-auto' src={NETFLIX_LOGO} alt="logo" />
+        </div>
+        <div className='flex justify-around md:gap-4 text-sm md:text-md md:px-4 py-1 md:py-4'>
+          <button className='bg-purple-600 rounded-md text-white px-2 py-1' onClick={handleGptSearchToggle}>GPT Search</button>
+          <select onClick={handleLanguageChange} className='bg-purple-600 md:bg-transparent text-sm text-white border border-white rounded-md px-2'>
             <option value="en">English</option>
             <option value="hindi">Hindi</option>
           </select>
           {
-            user && <div className='flex gap-6'>
-              <img className='h-8 w-fit rounded-full' src={user?.photoURL} alt="user-logo"/> 
-          <button onClick={handleSignOut} className='bg-red-600 text-white rounded-md px-4 py-1'>Sign Out</button>
+            user && <div className='flex gap-2'>
+              <img className='h-8 md:ml-4 w-fit rounded-full' src={user?.photoURL} alt="user-logo"/> 
+          <button onClick={handleSignOut} className='bg-red-600 text-white rounded-md px-2'>Sign Out</button>
             </div>
           }
           {/* {

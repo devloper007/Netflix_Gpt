@@ -18,14 +18,16 @@ const Browse = () => {
 
   return (
     <div>
+      <div className="flex justify-center">
       <Header />
+      </div>
       {gptSearchToggle ? (
         <GptSearch />
       ) : (
-        <>
+        <div className="pt-12 md:pt-0">
           <MainContainer />
           <SecondaryContainer />
-        </>
+        </div>
       )}
     </div>
   );

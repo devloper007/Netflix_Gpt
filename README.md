@@ -21,6 +21,8 @@
 -create different hooks to get data for diff catagory movies like trending, upcoming etc.
 -created GPT search page
 -implemented language feature
+-use Memoization to reduce repeating API call when we have already data in Redux store
+-implemented mobile responsiveness
 
 
 # features

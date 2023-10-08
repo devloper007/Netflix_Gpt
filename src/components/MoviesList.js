@@ -3,14 +3,14 @@ import MovieCard from './MovieCard';
 import Shimmer from './Shimmer';
 
 const MoviesList = ({title, movies}) => {
-
+console.log('');
   return !movies ? <Shimmer /> : (
-    <div className='py-4 px-2'>
-        <h1 className='font-semibold text-xl text-white'>{title}</h1>
+    <div className='py-1 md:py-4 px-2'>
+        <h1 className='font-semibold md:text-xl text-white'>{title}</h1>
         <div className='flex overflow-x-scroll py-4'>
-            <div className='flex flex-row gap-3 hideScrollbar'>
+            <div className='flex flex-row gap-2 md:gap-3 hideScrollbar'>
                 {
-        movies?.map(movie => <MovieCard key={movie?.id} poster={movie?.poster_path} />)
+        movies?.map(movie =>(movie?.poster_path && <MovieCard key={movie?.id} poster={movie?.poster_path} />))
                 }
             </div>
         </div>
