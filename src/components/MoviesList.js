@@ -1,9 +1,10 @@
-import React from 'react';
+// import React, { useEffect, useState } from 'react';
 import MovieCard from './MovieCard';
 import Shimmer from './Shimmer';
+// import Loader from './Loader';
 
 const MoviesList = ({title, movies}) => {
-console.log('');
+ 
   return !movies ? <Shimmer /> : (
     <div className='py-1 md:py-4 px-2'>
         <h1 className='font-semibold md:text-xl text-white'>{title}</h1>

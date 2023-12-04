@@ -6,12 +6,15 @@ import { auth } from '../utils/firebase';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addUser } from '../utils/userSlice';
+import { addGptSearchToggle } from '../utils/gptSlice';
 import { LOGIN_PAGE_COVER, USER_LOGO } from '../utils/constants';
 import { lang } from '../utils/langConstants';
+import Loader from './Loader';
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errMessage, setErrMessage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -21,11 +24,13 @@ const Login = () => {
   const name = useRef(null);
 
   const language = useSelector(store => store.config.language);
+  const gptSearchToggle = useSelector(store => store.gpt.gptSearchToggle);
 
 const handleClickEvent = () =>{
   const message = checkValidData(name?.current?.value, email.current.value, password.current.value);
   setErrMessage(message);
   if(message === null){
+    setIsLoading(true);
     if(!isSignInForm){
       createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
       .then((userCredential) => {
@@ -48,9 +53,12 @@ const handleClickEvent = () =>{
           // An error occurred
           // ...
         });
+        setIsLoading(false);
+        dispatch(addGptSearchToggle(!gptSearchToggle));
         navigate("/browse");
       })
       .catch((error) => {
+        setIsLoading(false);
         const errorCode = error.code;
         const errorMessage = error.message;
         setErrMessage(errorMessage)
@@ -61,11 +69,15 @@ const handleClickEvent = () =>{
     .then((userCredential) => {
       // Signed in 
       const user = userCredential.user;
+      setIsLoading(false);
+      dispatch(addGptSearchToggle(!gptSearchToggle));
       navigate("/browse");
     })
     .catch((error) => {
+      setIsLoading(false);
       const errorCode = error.code;
       const errorMessage = error.message;
+      setErrMessage(errorMessage)
     });
    }
   }
@@ -83,8 +95,12 @@ const handleClickEvent = () =>{
             <input ref={email} className='px-4 py-1 md:py-3 bg-gray-800 rounded-md text-white text-base outline-none' type="email" name="email" placeholder={lang[language].email}/>
             <input ref={password} className='px-4 py-1 md:py-3 bg-gray-800 rounded-md text-white text-base outline-none' type="password" name="password" placeholder={lang[language].password}/>
             <p className='text-yellow-600'>{errMessage}</p>
+            { isLoading && <Loader />}
             <button onClick={handleClickEvent} className='w-1/2 mx-auto px-4 py-1 md:py-3 bg-red-800 rounded-md text-white font-medium md:text-lg'>{isSignInForm ? "Sign In":"Sign Up"}</button>
-            <p className='text-white cursor-pointer' onClick={() => setIsSignInForm(!isSignInForm)}>{isSignInForm ? lang[language].signUpLine : lang[language].alreadyRegistered}</p>
+            <p className='text-white cursor-pointer' onClick={() => {
+              setIsSignInForm(!isSignInForm); 
+              setErrMessage(null);
+            }}>{isSignInForm ? lang[language].signUpLine : lang[language].alreadyRegistered}</p>
           </form>
         </div>
     </div>

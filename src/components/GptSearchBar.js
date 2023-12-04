@@ -1,11 +1,13 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { lang } from '../utils/langConstants';
 import { useDispatch, useSelector } from 'react-redux';
 import openai from '../utils/openai';
 import { addGptResults } from '../utils/gptSlice';
 import { API_OPTIONS } from '../utils/constants';
+import Loader from './Loader';
 
 const GptSearchBar = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const language = useSelector(store => store.config.language);
   const searchTxt = useRef(null);
   const dispatch = useDispatch();
@@ -18,6 +20,7 @@ const GptSearchBar = () => {
   }
 
   const handleGptSearchClick = async() =>{
+    setIsLoading(true);
     console.log('srch',searchTxt.current.value);
     const searchQuery = "Act as a movie recommendation system and suggest some movies for the query: " + searchTxt.current.value + ". only give me the top 5 movies name, comma seperated as the result like this example given ahead. Example: the winter, the avengers, inception, rockey, raid";
       const gptResult = await openai.chat.completions.create({
@@ -31,6 +34,7 @@ const GptSearchBar = () => {
       const moviesData = gptContent.map(movie => getSearchedMovies(movie)); //will get [promise, promise, promise, promise, promise]
       const gptSearchResult = await Promise.all(moviesData); //resolving all promises
       console.log('movie promises',gptSearchResult);
+      setIsLoading(false);
       dispatch(addGptResults({movieNames: gptContent, allGptMoviesData: gptSearchResult}));
   }
 
@@ -40,6 +44,11 @@ const GptSearchBar = () => {
             <input ref={searchTxt} className='border border-gray-600 rounded-md mr-2 px-2 py-1 col-span-9 md:col-span-10' type="text" placeholder={lang[language].gptSearchPlaceholder}/>
             <button onClick={handleGptSearchClick} className='bg-teal-700 rounded-md py-1 px-4 text-white col-span-3 md:col-span-2'>{lang[language].search}</button>
         </form>
+       <div className='mt-10'>
+       {
+          isLoading && <Loader />
+        }
+       </div>
     </div>
   )
 }

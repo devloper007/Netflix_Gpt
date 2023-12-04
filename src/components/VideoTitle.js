@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { IMG_CDN_URL } from '../utils/constants';
 
 const VideoTitle = ({title, overview, logo}) => {
+
+useEffect(()=>{
+  const truncatedWord = overview.split(' ');
+  if(truncatedWord.length > 30){
+    overview = truncatedWord.splice(0, 30).join(' ') + '...';
+  }
+},[]);
+
   return (
     <div className='w-screen aspect-video absolute bg-gradient-to-r from-black pt-[18%] md:pt-[14%] pl-[10%]'>
       <div className='flex flex-col gap-1 md:gap-4 md:w-1/3 text-white'>

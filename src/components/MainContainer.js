@@ -11,7 +11,7 @@ const MainContainer = () => {
 
   return (
     <div>
-        <VideoTitle title={title} overview={overview} logo={poster_path}/>
+        <VideoTitle title={title} overview={overview.split(' ').splice(0,30).join(' ') +'...'} logo={poster_path}/>
          <VideoBackground movieId={id} />
     </div>
   )
