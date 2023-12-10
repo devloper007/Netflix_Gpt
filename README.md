@@ -26,7 +26,7 @@
 
 
 # features
--Login/sign up
+-Login/sign up 
     -sign in /sign up form
     -redirect to browse page
 -Browse (after login)
